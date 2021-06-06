@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+
 using Photos.Domain.DataBaseEntity;
 
 namespace Photos.Infrastructure
@@ -33,7 +34,7 @@ namespace Photos.Infrastructure
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                 @"Server=(localdb)\mssqllocaldb;Database=Photos-Mock;Trusted_Connection=True;ConnectRetryCount=0");
+                 @"Server=(localdb)\mssqllocaldb;Database=Photos-Dev;Trusted_Connection=True;ConnectRetryCount=0");
             }
 
             base.OnConfiguring(optionsBuilder);
