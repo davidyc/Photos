@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Photos.Application.Extensions.DependencyInjection;
 using Photos.Infrastructure;
 
 namespace Photos
@@ -30,8 +31,9 @@ namespace Photos
             {
                 configuration.RootPath = "ClientApp/build";
             });
-            services.AddDbContext<PhotosDBContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("PhotosDBContext")));
+
+            services.AddPhotosDbContext();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Photos.Application\Photos.Application.csproj" />
     <ProjectReference Include="..\Photos.Infrastructure\Photos.Infrastructure.csproj" />
   </ItemGroup>
 
