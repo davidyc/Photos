@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Photos.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +28,16 @@ namespace Photos.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+            var db = new PhotosDBContext();
+            var test = db.Test;
+
+
+            return test.Select(index => new WeatherForecast
             {
-                Date = DateTime.Now.AddDays(index),
+                Date = DateTime.Now.AddDays(index.Id),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = index.Test
             })
             .ToArray();
         }
