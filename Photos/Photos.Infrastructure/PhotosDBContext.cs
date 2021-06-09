@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 
 using Photos.Domain.DataBaseEntity;
+using Microsoft.Extensions.Configuration ;
 
 namespace Photos.Infrastructure
 {
@@ -33,9 +34,15 @@ namespace Photos.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(
-                 @"Server=(localdb)\mssqllocaldb;Database=Photos-Dev;Trusted_Connection=True;ConnectRetryCount=0");
+                var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                //.AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile($"appsettings.{envName}.json", optional: false)
+                .Build();
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PhotosDBContext"));
             }
+        
 
             base.OnConfiguring(optionsBuilder);
         }
