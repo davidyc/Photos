@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Photos.Infrastructure\Photos.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interface\" />
+  </ItemGroup>
+
 </Project>

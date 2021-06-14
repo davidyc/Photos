@@ -5,6 +5,8 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { Davidyc } from './components/Davidyc';
+import { QRCode } from './components/QRCode';
+
 
 import './custom.css'
 
@@ -14,10 +16,11 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-        <Route path='/davidyc' component={Davidyc} />
+            <Route exact path='/' component={Home} />
+            <Route path='/counter' component={Counter} />
+            <Route path='/fetch-data' component={FetchData} />
+            <Route path='/davidyc' component={Davidyc} />
+            <Route path='/qrcode' component={QRCode} />
       </Layout>
     );
   }

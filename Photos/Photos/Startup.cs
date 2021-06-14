@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Photos.Application.Extensions.DependencyInjection;
 using Photos.Infrastructure;
+using Photos.Infrastructure.Service;
+using Photos.Infrastructure.Service.Interface;
 
 namespace Photos
 {
@@ -33,6 +35,7 @@ namespace Photos
             });
 
             services.AddPhotosDbContext();
+            services.AddTransient<IQRCodeService, QRCodeService>();
 
         }
 
@@ -53,6 +56,7 @@ namespace Photos
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
 
             app.UseRouting();
 

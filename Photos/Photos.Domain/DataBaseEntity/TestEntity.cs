@@ -9,5 +9,6 @@ namespace Photos.Domain.DataBaseEntity
     {
         public int Id { get; set; }
         public String Test { get; set; }
+        public byte[] QR { get; set; }
     }
 }
