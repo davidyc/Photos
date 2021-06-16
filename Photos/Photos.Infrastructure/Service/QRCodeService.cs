@@ -25,7 +25,7 @@ namespace Photos.Infrastructure.Service
 
         public QRCodeModel GenerateQRCode(string text)
         {            
-            QRCodeData _qrCodeData = _qrCode.CreateQrCode(text, QRCodeGenerator.ECCLevel.L, true, true, EciMode.Iso8859_2);
+            QRCodeData _qrCodeData = _qrCode.CreateQrCode(text, QRCodeGenerator.ECCLevel.L, true, true, EciMode.Utf8);
             QRCode qrCode = new QRCode(_qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
             return new QRCodeModel { QRCode = _converter.BitmapToBytesCode(qrCodeImage) };
