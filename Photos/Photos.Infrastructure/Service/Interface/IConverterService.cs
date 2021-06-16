@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Photos.Infrastructure.Service.Interface
 {
-    public interface IConverter
+    public interface IConverterService
     {
         byte[] BitmapToBytesCode(Bitmap qrCodeImage);
     }

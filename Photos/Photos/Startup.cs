@@ -10,6 +10,7 @@ using Photos.Application.Extensions.DependencyInjection;
 using Photos.Infrastructure;
 using Photos.Infrastructure.Service;
 using Photos.Infrastructure.Service.Interface;
+using QRCoder;
 
 namespace Photos
 {
@@ -35,7 +36,9 @@ namespace Photos
             });
 
             services.AddPhotosDbContext();
-            services.AddTransient<IQRCodeService, QRCodeService>();
+            services.AddServices();
+           
+
 
         }
 

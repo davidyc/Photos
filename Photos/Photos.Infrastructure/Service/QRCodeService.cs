@@ -14,21 +14,14 @@ namespace Photos.Infrastructure.Service
     {
         private readonly ILogger<QRCodeService> _logger;
         private readonly QRCodeGenerator _qrCode;
-        private readonly IConverter _converter;
+        private readonly IConverterService _converter;
 
-        public QRCodeService()
-        {
-            //_logger = new Logger<QRCodeService>();
-            _qrCode = new QRCodeGenerator();
-            _converter = new ConverterSevice();
-        }
-        public QRCodeService(ILogger<QRCodeService> logger, QRCodeGenerator qrCode, IConverter converter)
+        public QRCodeService(ILogger<QRCodeService> logger, QRCodeGenerator qrCode, IConverterService converter)
         {
             _logger = logger;
             _qrCode = qrCode;
             _converter = converter;
         }
-
 
         public QRCodeModel GenerateQRCode(string text)
         {            
