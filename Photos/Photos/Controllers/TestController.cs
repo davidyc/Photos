@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Mvc;
 using Photos.Domain.DataBaseEntity;
 using Photos.Domain.QR;
 using Photos.Infrastructure.Service;
@@ -18,16 +19,19 @@ namespace Photos.Controllers
     public class TestController : Controller
     {
         private readonly IQRCodeService _qrCode;
+        private readonly IBlobService _blobServiceClient;       
 
-        public TestController(IQRCodeService qrCode)
+        public TestController(IBlobService blobServiceClient)
         {
-            _qrCode = qrCode;
+            _blobServiceClient = blobServiceClient;
         }
 
         [HttpGet]
-        public QRCodeModel Get(string text)
+        public bool Get()
         {
-            return _qrCode.GenerateQRCode(text);
+            var x = _blobServiceClient.GetBlobAsync("Links.txt").Result;
+
+            return true;
         }
 
 

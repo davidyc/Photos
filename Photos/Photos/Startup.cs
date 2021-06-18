@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,7 +38,11 @@ namespace Photos
 
             services.AddPhotosDbContext();
             services.AddServices();
-           
+          
+            services.AddSingleton(x=>new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
+            services.AddSingleton<IBlobService, BlobService>();
+
+
 
 
         }
