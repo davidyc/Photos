@@ -27,11 +27,12 @@ namespace Photos.Controllers
         }
 
         [HttpGet]
-        public bool Get()
+        public QRCodeModel Get()
         {
-            var x = _blobServiceClient.GetBlobAsync("Links.txt").Result;
-
-            return true;
+           // var x = _blobServiceClient.UploadAsync(Guid.NewGuid() + ".jpg", @"C:\Users\Sergey_Davydov2\Desktop\Grow\Layers\23306172.jpg").Result;
+           var x = _blobServiceClient.DownloadContentAsync("003cab19-30d9-4e45-9d32-38dca288bf65.jpg");
+            var r = x.Result.Content.ToArray();
+            return new QRCodeModel { QRCode = r };
         }
 
 

@@ -4,7 +4,7 @@ export class QRCode extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { QR: '', loading: false, Text: 'It is test text, please add here your text and click generate button привет' };
+        this.state = { QR: '', loading: false, Text: 'It is test text, please add here your text and click generate button' };
 
         this.handleChange = this.handleChange.bind(this);
     }
