@@ -12,5 +12,7 @@ namespace Photos.Infrastructure.Service.Interface
         Task<BlobDownloadResult> DownloadContentAsync(string name);
         Task<BlobContentInfo> UploadAsync(string fileName, Stream stream);
         Task<BlobContentInfo> UploadAsync(string fileName, string filPath);
+        Task<IEnumerable<BlobDownloadResult>> GetAllFile();
+        Task<IEnumerable<string>> GetListFileNameAsync();
     }
 }

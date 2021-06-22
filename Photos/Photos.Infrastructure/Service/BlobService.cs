@@ -22,7 +22,7 @@ namespace Photos.Infrastructure.Service
         public async Task<BlobDownloadResult> DownloadContentAsync(string fileName)
         {
             var blobClient = GetBlobClient(fileName);
-            var blob = await blobClient.DownloadContentAsync();
+            var blob = await blobClient.DownloadContentAsync();           
             return blob;
         }
 
@@ -39,6 +39,34 @@ namespace Photos.Infrastructure.Service
             var blob = await blobClient.UploadAsync(filPath);
             return blob;
         }
+
+        public async Task<IEnumerable<string>> GetListFileNameAsync()
+        {
+            var fileNamesList = new List<string>();
+            var client = _blobServiceClient.GetBlobContainerClient(_containerName);
+            var allBlobs = client.GetBlobs().AsPages();
+            foreach (var blob in allBlobs)
+            {
+                foreach (var file in blob.Values)
+                {
+                    fileNamesList.Add(file.Name);
+                }
+            }
+            return fileNamesList;           
+        }
+
+        public async Task<IEnumerable<BlobDownloadResult>> GetAllFile()
+        {
+            var list = await GetListFileNameAsync();
+            var resultList = new List<BlobDownloadResult>();
+            foreach (var item in list)
+            {
+                resultList.Add(await DownloadContentAsync(item));
+            }
+
+           return resultList;
+        }
+
 
         private BlobClient GetBlobClient(string fileName)
         {
