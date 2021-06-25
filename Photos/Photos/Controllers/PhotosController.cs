@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Storage.Blobs.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Photos.Infrastructure.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace Photos.Controllers
     [ApiController]
     [Route("[controller]")]
     public class PhotosController : Controller
-    {     
+    {
         private readonly IBlobService _blobServiceClient;
 
         public PhotosController(IBlobService blobServiceClient)
@@ -27,9 +29,14 @@ namespace Photos.Controllers
             {
                 arrFileBytes.Add(item.Content.ToArray());
             }
-           
+
             return arrFileBytes;
         }
 
+        [HttpPost]
+        public  BlobContentInfo Post([FromForm] IFormFile body)
+        {
+            return _blobServiceClient.UploadAsync(body.FileName, body.OpenReadStream()).Result;
+        }
     }
 }
