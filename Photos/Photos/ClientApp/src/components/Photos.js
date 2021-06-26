@@ -7,18 +7,26 @@ export class Photos extends Component {
         super(props);
         this.state = {
             Images: [],
-            selectedFile: null
+            selectedFile: null,
+            loading: false,
+            imageinput: true,
+            uploadButton: true
         };     
     } 
 
     fileSelectedHandler = event => {        
-        this.selectedFile = event.target.files[0];        
+        this.selectedFile = event.target.files[0];
+        this.setState({uploadButton:false})
     };
 
     fileUploadHandler = () => {
         const fd = new FormData();          
-        fd.append('body', this.selectedFile,  this.selectedFile.name)
-        axios.post("photos", fd);
+        fd.append('body', this.selectedFile, this.selectedFile.name);
+        this.setState({ loading: true, button: false, uploadButton: true });
+        axios.post("photos", fd)
+            .then((res) => {
+                this.setState({ loading: false, button: true });                
+            });     
     }
 
     componentDidMount() {
@@ -29,8 +37,17 @@ export class Photos extends Component {
         return (   
             <div>
                 <div>
-                    <input type="file" onChange={this.fileSelectedHandler} />
-                    <button onClick={this.fileUploadHandler }>Upload</button>
+                    <input type="file" onChange={this.fileSelectedHandler} disabled={this.state.loading}/>
+                    <button className="button" onClick={this.fileUploadHandler} disabled={this.state.uploadButton}>
+                            {this.state.loading && (
+                                <i
+                                    className="fa fa-refresh fa-spin"
+                                    style={{ marginRight: "5px" }}
+                                />
+                            )}
+                            {!this.state.loading && <span>Upload image</span>}
+                            {this.state.loading && <span>Image is uploading</span>}
+                    </button>                        
                 </div>
 
                 <h1>All photos</h1>  
