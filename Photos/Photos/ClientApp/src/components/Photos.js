@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import axios  from 'axios';
 
+const imgType = "image/jpeg";
 
 export class Photos extends Component {
     constructor(props) {
@@ -16,7 +17,12 @@ export class Photos extends Component {
 
     fileSelectedHandler = event => {        
         this.selectedFile = event.target.files[0];
-        this.setState({uploadButton:false})
+        if (this.selectedFile.type == imgType) {
+            this.setState({ uploadButton: false })
+        }
+        else {
+            alert("Only "+imgType)
+        }        
     };
 
     fileUploadHandler = () => {
@@ -51,7 +57,12 @@ export class Photos extends Component {
                 </div>
 
                 <h1>All photos</h1>  
-                {this.state.Images.map(i => (<img src={"data:image/png;base64," + i} />))}        
+                {this.state.Images.map(i => (
+                    <img                       
+                        src={"data:image/png;base64," + i}
+                        style={{ height: 400, width: 400 }}
+                    />
+                    ))}        
             </div>
         );
     }  
@@ -59,7 +70,8 @@ export class Photos extends Component {
     async getAllPhotos() {
         const response = await fetch('Photos');
         const data = await response.json();        
-        this.setState({ Images: data });        
+        this.setState({ Images: data });   
+        console.log(this.state.Images)
      
     }
 }
