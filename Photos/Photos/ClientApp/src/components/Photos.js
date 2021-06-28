@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
-import axios  from 'axios';
+import axios from 'axios';
+import { Container, Row, Col } from 'reactstrap';
 
 const imgType = "image/jpeg";
 
@@ -35,6 +36,13 @@ export class Photos extends Component {
             });     
     }
 
+    fileDeleteHandler = (fileName) => {    
+        axios.delete("photos", fileName)
+            .then((res) => {
+                alert("!");
+            });
+    }
+
     componentDidMount() {
         this.getAllPhotos();
     }
@@ -57,12 +65,21 @@ export class Photos extends Component {
                 </div>
 
                 <h1>All photos</h1>  
-                {this.state.Images.map(i => (
-                    <img                       
-                        src={"data:image/png;base64," + i}
-                        style={{ height: 400, width: 400 }}
-                    />
-                    ))}        
+                <Container>
+                    <Row>                                     
+                            {this.state.Images.map((i) => {
+                                return(
+                                    <Col xs="3">  
+                                    <img
+                                        src={"data:image/png;base64," + i.bytesArray}
+                                        style={{ height: 400, width: 400 }}                      
+                                        />
+                                        <button onClick={this.fileDeleteHandler}>Delete</button>
+                                    </Col>
+                             )
+                            })}                           
+                    </Row>
+                </Container>
             </div>
         );
     }  

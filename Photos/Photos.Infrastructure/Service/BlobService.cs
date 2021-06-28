@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Photos.Domain.Blob;
 using Photos.Infrastructure.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,13 @@ namespace Photos.Infrastructure.Service
             return blob;
         }
 
+        public async Task<bool> DeleteFileAsync(string fileName)
+        {
+            var blobClient = GetBlobClient(fileName);
+            var deleted = await blobClient.DeleteIfExistsAsync();
+            return deleted;
+        }
+
         public async Task<IEnumerable<string>> GetListFileNameAsync()
         {
             var fileNamesList = new List<string>();
@@ -55,13 +63,14 @@ namespace Photos.Infrastructure.Service
             return fileNamesList;           
         }
 
-        public async Task<IEnumerable<BlobDownloadResult>> GetAllFile()
+        public async Task<IEnumerable<BlobDownloadModel>> GetAllFile()
         {
             var list = await GetListFileNameAsync();
-            var resultList = new List<BlobDownloadResult>();
+            var resultList = new List<BlobDownloadModel>();
             foreach (var item in list)
             {
-                resultList.Add(await DownloadContentAsync(item));
+                var blobFile = await DownloadContentAsync(item);
+                resultList.Add(new BlobDownloadModel { Name = item, BytesArray = blobFile.Content.ToArray() });
             }
 
            return resultList;

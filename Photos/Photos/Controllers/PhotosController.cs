@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Photos.Domain.Blob;
 using Photos.Infrastructure.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -21,22 +22,21 @@ namespace Photos.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<byte[]> Get()
+        public IEnumerable<BlobDownloadModel> Get()
         {
-            var allFiles = _blobServiceClient.GetAllFile().Result;
-            var arrFileBytes = new List<byte[]>();
-            foreach (var item in allFiles)
-            {
-                arrFileBytes.Add(item.Content.ToArray());
-            }
-
-            return arrFileBytes;
+            return _blobServiceClient.GetAllFile().Result;
         }
 
         [HttpPost]
         public  BlobContentInfo Post([FromForm] IFormFile body)
         {
             return _blobServiceClient.UploadAsync(body.FileName, body.OpenReadStream()).Result;
+        }
+
+        [HttpDelete]
+        public bool Delete(string fileName)
+        {
+            return _blobServiceClient.DeleteFileAsync(fileName).Result;
         }
     }
 }
