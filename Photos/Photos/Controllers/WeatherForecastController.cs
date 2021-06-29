@@ -30,16 +30,10 @@ namespace Photos.Controllers
             var rng = new Random();
 
             var db = new PhotosDBContext();
-            var test = db.Test;
+           // var test = db.Test;
 
 
-            return test.Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index.Id),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = index.Test
-            })
-            .ToArray();
+            return null;
         }
     }
 }

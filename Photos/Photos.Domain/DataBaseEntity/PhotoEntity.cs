@@ -10,5 +10,6 @@ namespace Photos.Domain.DataBaseEntity
         public int Id { get; set; }
         public string Name { get; set; }
         public string URL { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }
