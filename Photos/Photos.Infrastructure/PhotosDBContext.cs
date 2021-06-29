@@ -19,9 +19,7 @@ namespace Photos.Infrastructure
         public PhotosDBContext(DbContextOptions<PhotosDBContext> options) : base(options)
         {
 
-        }
-
-        public DbSet<TestEntity> Test { get; set; }
+        }     
         public DbSet<PhotoEntity> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
