@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Photos.Application.Extensions.DependencyInjection;
+using Photos.Application.Repositories;
+using Photos.Domain.Repositories;
 using Photos.Infrastructure;
 using Photos.Infrastructure.Service;
 using Photos.Infrastructure.Service.Interface;
@@ -41,7 +43,7 @@ namespace Photos
           
             services.AddSingleton(x=>new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
             services.AddSingleton<IBlobService, BlobService>();
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 

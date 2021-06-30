@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Photos.Domain.Blob;
+using Photos.Domain.Repositories;
 using Photos.Infrastructure.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,19 @@ namespace Photos.Controllers
     public class PhotosController : Controller
     {
         private readonly IBlobService _blobServiceClient;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PhotosController(IBlobService blobServiceClient)
+        public PhotosController(IBlobService blobServiceClient, IUnitOfWork unitOfWork)
         {
             _blobServiceClient = blobServiceClient;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public IEnumerable<BlobDownloadModel> Get()
         {
-            return _blobServiceClient.GetAllFile().Result;
+            var x = _unitOfWork.PhotoRepository.GetPhotosAsync().Result;
+            return null;
         }
 
         [HttpPost]

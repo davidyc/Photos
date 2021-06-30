@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Photos.Domain\Photos.Domain.csproj" />
     <ProjectReference Include="..\Photos.Infrastructure\Photos.Infrastructure.csproj" />
   </ItemGroup>
 
