@@ -25,10 +25,16 @@ namespace Photos.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<BlobDownloadModel> Get()
+        public async Task<IEnumerable<BlobDownloadModel>> Get()
         {
-            var x = _unitOfWork.PhotoRepository.GetPhotosAsync().Result;
-            return null;
+            var blobDownloadModels = new List<BlobDownloadModel>();
+            var photos = _unitOfWork.PhotoRepository.GetPhotosAsync().Result;
+            foreach (var photo in photos)
+            {
+                var file = await _blobServiceClient.GetFileByNameAsync(photo.Name);
+                blobDownloadModels.Add(file);
+            }
+            return blobDownloadModels;
         }
 
         [HttpPost]

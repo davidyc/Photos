@@ -16,5 +16,6 @@ namespace Photos.Infrastructure.Service.Interface
         Task<IEnumerable<BlobDownloadModel>> GetAllFile();
         Task<IEnumerable<string>> GetListFileNameAsync();
         Task<bool> DeleteFileAsync(string fileName);
+        Task<BlobDownloadModel> GetFileByNameAsync(string fileName);
     }
 }

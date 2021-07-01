@@ -76,6 +76,11 @@ namespace Photos.Infrastructure.Service
            return resultList;
         }
 
+        public async Task<BlobDownloadModel> GetFileByNameAsync(string fileName)
+        {
+            var blobFile = await DownloadContentAsync(fileName);
+            return new BlobDownloadModel { Name = fileName , BytesArray = blobFile.Content.ToArray()};
+        }
 
         private BlobClient GetBlobClient(string fileName)
         {
