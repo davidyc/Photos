@@ -1,4 +1,5 @@
 using Azure.Storage.Blobs;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,13 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Photos.Application.AssemblyMarker;
 using Photos.Application.Extensions.DependencyInjection;
+using Photos.Application.Queries.Photos;
 using Photos.Application.Repositories;
 using Photos.Domain.Repositories;
 using Photos.Infrastructure;
 using Photos.Infrastructure.Service;
 using Photos.Infrastructure.Service.Interface;
 using QRCoder;
+using System.Reflection;
 
 namespace Photos
 {
@@ -44,6 +48,7 @@ namespace Photos
             services.AddSingleton(x=>new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
             services.AddSingleton<IBlobService, BlobService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddMediatR(typeof(IApplicationAssemblyMarker).GetTypeInfo().Assembly);
 
 
 

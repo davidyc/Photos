@@ -1,6 +1,8 @@
 ﻿using Azure.Storage.Blobs.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Photos.Application.Queries.Photos;
 using Photos.Domain.Blob;
 using Photos.Domain.Repositories;
 using Photos.Infrastructure.Service.Interface;
@@ -16,19 +18,19 @@ namespace Photos.Controllers
     public class PhotosController : Controller
     {
         private readonly IBlobService _blobServiceClient;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public PhotosController(IBlobService blobServiceClient, IUnitOfWork unitOfWork)
+        public PhotosController(IBlobService blobServiceClient, IMediator mediator)
         {
             _blobServiceClient = blobServiceClient;
-            _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IEnumerable<BlobDownloadModel>> Get()
         {
             var blobDownloadModels = new List<BlobDownloadModel>();
-            var photos = _unitOfWork.PhotoRepository.GetPhotosAsync().Result;
+            var photos = await _mediator.Send(new GetPhotosQuery());
             foreach (var photo in photos)
             {
                 var file = await _blobServiceClient.GetFileByNameAsync(photo.Name);
