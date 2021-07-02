@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Photos.Application.Commands.Photos;
 using Photos.Application.Queries.Photos;
 using Photos.Domain.Blob;
 using Photos.Domain.Repositories;
@@ -31,6 +32,8 @@ namespace Photos.Controllers
         {
             var blobDownloadModels = new List<BlobDownloadModel>();
             var photos = await _mediator.Send(new GetPhotosQuery());
+
+            //TODO  перести в метод
             foreach (var photo in photos)
             {
                 var file = await _blobServiceClient.GetFileByNameAsync(photo.Name);
@@ -40,14 +43,17 @@ namespace Photos.Controllers
         }
 
         [HttpPost]
-        public  BlobContentInfo Post([FromForm] IFormFile body)
+        public BlobContentInfo Post([FromForm] IFormFile body)
         {
-            return _blobServiceClient.UploadAsync(body.FileName, body.OpenReadStream()).Result;
+            var fileName = $"{Guid.NewGuid()}_{body.FileName}";
+            _mediator.Send(new AddPhotoCommand(fileName, "URL"));
+            return _blobServiceClient.UploadAsync(fileName, body.OpenReadStream()).Result;
         }
 
-        [HttpDelete]
+        [HttpDelete("{fileName}")]
         public bool Delete(string fileName)
         {
+            _mediator.Send(new RemovePhotoCommand(fileName));
             return _blobServiceClient.DeleteFileAsync(fileName).Result;
         }
     }

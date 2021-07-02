@@ -32,14 +32,15 @@ export class Photos extends Component {
         this.setState({ loading: true, button: false, uploadButton: true });
         axios.post("photos", fd)
             .then((res) => {
-                this.setState({ loading: false, button: true });                
+                this.setState({ loading: false, button: true }); 
+                window.location.reload();
             });     
     }
 
-    fileDeleteHandler = (fileName) => {    
-        axios.delete("photos", fileName)
+    fileDeleteHandler = (InFileName) => {        
+        axios.delete("photos/"+ InFileName )
             .then((res) => {
-                alert("!");
+                window.location.reload();
             });
     }
 
@@ -64,22 +65,18 @@ export class Photos extends Component {
                     </button>                        
                 </div>
 
-                <h1>All photos</h1>  
-                <Container>
-                    <Row>                                     
-                            {this.state.Images.map((i) => {
-                                return(
-                                    <Col xs="3">  
-                                    <img
-                                        src={"data:image/png;base64," + i.bytesArray}
-                                        style={{ height: 400, width: 400 }}                      
-                                        />
-                                        <button onClick={this.fileDeleteHandler}>Delete</button>
-                                    </Col>
-                             )
-                            })}                           
-                    </Row>
-                </Container>
+                <h1>All photos</h1>                                                   
+                {this.state.Images.map((i) => {
+                    return (
+                        <div class="card" >
+                            <button onClick={()=> this.fileDeleteHandler(i.name)} >Delete</button>
+                            <img class="card-img-top" src={"data:image/png;base64," + i.bytesArray} alt={i.name} />
+                            <div class="card-body">
+                                <p class="card-text">{i.name}</p>
+                            </div>
+                        </div>
+                    )
+                })}                  
             </div>
         );
     }  

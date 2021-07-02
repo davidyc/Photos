@@ -29,14 +29,14 @@ namespace Photos.Infrastructure.Service
 
         public async Task<BlobContentInfo> UploadAsync(string fileName, Stream stream)
         {
-            var blobClient = GetBlobClient($"{Guid.NewGuid()}_{fileName}");
+            var blobClient = GetBlobClient(fileName);
             var blob = await blobClient.UploadAsync(stream);
             return blob;
         }
 
         public async Task<BlobContentInfo> UploadAsync(string fileName, string filPath)
         {
-            var blobClient = GetBlobClient($"{Guid.NewGuid()}_{fileName}");
+            var blobClient = GetBlobClient(fileName);
             var blob = await blobClient.UploadAsync(filPath);
             return blob;
         }

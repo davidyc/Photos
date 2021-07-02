@@ -11,5 +11,8 @@ namespace Photos.Domain.Repositories
     public interface IPhotoRepository : IDataBaseRepository<PhotoEntity, int>
     {
         Task<IEnumerable<PhotoEntity>> GetPhotosAsync(CancellationToken cancellationToken = default);
+        Task AddPhotoAsync(PhotoEntity photo, CancellationToken cancellationToken);
+        void RemovePhotoAsync(PhotoEntity photo);
+        Task<PhotoEntity> FindByIDPhotoAsync(string name, CancellationToken cancellationToken);
     }
 }
