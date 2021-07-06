@@ -61,7 +61,7 @@ export class QRCode extends Component {
     };
 
     async testData(text) {
-        const response = await fetch('QRCode/?text=' + text);
+        const response = await fetch('/api/QRCode/?text=' + text);
         const data = await response.json();
         this.setState({ QR: data});
     }

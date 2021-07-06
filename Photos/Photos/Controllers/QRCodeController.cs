@@ -5,7 +5,7 @@ using Photos.Infrastructure.Service.Interface;
 namespace Photos.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class QRCodeController : Controller
     {
         private readonly IQRCodeService _qrCode;

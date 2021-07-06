@@ -30,7 +30,7 @@ export class Photos extends Component {
         const fd = new FormData();          
         fd.append('body', this.selectedFile, this.selectedFile.name);
         this.setState({ loading: true, button: false, uploadButton: true });
-        axios.post("photos", fd)
+        axios.post("/api/photos", fd)
             .then((res) => {
                 this.setState({ loading: false, button: true }); 
                 window.location.reload();
@@ -38,7 +38,7 @@ export class Photos extends Component {
     }
 
     fileDeleteHandler = (InFileName) => {        
-        axios.delete("photos/"+ InFileName )
+        axios.delete("/api/photos/"+ InFileName )
             .then((res) => {
                 window.location.reload();
             });
@@ -82,7 +82,7 @@ export class Photos extends Component {
     }  
 
     async getAllPhotos() {
-        const response = await fetch('Photos');
+        const response = await fetch('/api/Photos');
         const data = await response.json();        
         this.setState({ Images: data });   
         console.log(this.state.Images)

@@ -19,7 +19,7 @@ using Microsoft.Extensions.Configuration;
 namespace Photos.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class TestController : Controller
     {
         private readonly IQRCodeService _qrCode;

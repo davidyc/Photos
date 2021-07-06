@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Photos.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class PhotosController : Controller
     {
         private readonly IBlobService _blobServiceClient;
