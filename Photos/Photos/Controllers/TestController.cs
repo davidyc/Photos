@@ -12,6 +12,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
 
 namespace Photos.Controllers
 {
@@ -29,20 +32,21 @@ namespace Photos.Controllers
 
         [HttpGet]
         public IEnumerable<byte[]> Get()
-        {
-            // var x = _blobServiceClient.UploadAsync(Guid.NewGuid() + ".jpg", @"C:\Users\Sergey_Davydov2\Desktop\Grow\Layers\23306172.jpg").Result;
-            // var x = _blobServiceClient.DownloadContentAsync("003cab19-30d9-4e45-9d32-38dca288bf65.jpg");
-            // var x = _blobServiceClient.GetAllFile().Result;
-            // var xx = new List<byte[]>();
-            // foreach (var item in x)
-            // {
-            //     xx.Add(item.Content.ToArray());
-            // }
-            //// var r = x.FirstOrDefault().Content.ToArray();
-            // return xx;
+        {        
+
             return null;
         }
 
 
+        private static void Static()
+        {
+            
+
+        }
+
+    }
+    public class ConnectionStrings
+    {
+        public String PhotosDBContext { get; set; }
     }
 }

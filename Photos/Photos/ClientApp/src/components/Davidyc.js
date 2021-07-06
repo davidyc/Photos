@@ -5,6 +5,10 @@ export class Davidyc extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.test();
+    }
+
     render() {
        
         return (
@@ -13,4 +17,14 @@ export class Davidyc extends Component {
             </div>
         );
     }  
+
+
+
+    async test() {
+        const response = await fetch('Test');
+        const data = await response.json();
+        this.setState({ Images: data });
+        console.log(this.state.Images)
+    }
+    
 }

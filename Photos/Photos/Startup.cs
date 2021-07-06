@@ -44,7 +44,7 @@ namespace Photos
 
             services.AddPhotosDbContext();
             services.AddServices();
-          
+                        
             services.AddSingleton(x=>new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
             services.AddSingleton<IBlobService, BlobService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
