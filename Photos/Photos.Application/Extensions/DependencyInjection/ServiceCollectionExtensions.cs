@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Photos.Application.Repositories;
+using Photos.Domain.Repositories;
 using Photos.Infrastructure.Service;
 using Photos.Infrastructure.Service.Interface;
 using QRCoder;
@@ -15,6 +17,8 @@ namespace Photos.Application.Extensions.DependencyInjection
             services.AddTransient<IQRCodeService, QRCodeService>();
             services.AddTransient<IConverterService, ConverterSevice>();
             services.AddTransient<QRCodeGenerator, QRCodeGenerator>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             return services;
         }

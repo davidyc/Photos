@@ -47,7 +47,7 @@ namespace Photos
                         
             services.AddSingleton(x=>new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
             services.AddSingleton<IBlobService, BlobService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
             services.AddMediatR(typeof(IApplicationAssemblyMarker).GetTypeInfo().Assembly);
 
 
