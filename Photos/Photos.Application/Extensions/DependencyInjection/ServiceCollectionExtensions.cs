@@ -18,7 +18,8 @@ namespace Photos.Application.Extensions.DependencyInjection
             services.AddTransient<IConverterService, ConverterSevice>();
             services.AddTransient<QRCodeGenerator, QRCodeGenerator>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<IEventService, EventService>();
+            
 
             return services;
         }

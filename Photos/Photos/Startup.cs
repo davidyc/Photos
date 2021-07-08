@@ -1,4 +1,4 @@
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +49,15 @@ namespace Photos
             services.AddSingleton<IBlobService, BlobService>();
             
             services.AddMediatR(typeof(IApplicationAssemblyMarker).GetTypeInfo().Assembly);
+
+            //TODO сделать с объектом конфига
+            var redisConfig= Configuration.GetSection("Redis");
+
+            services.AddStackExchangeRedisCache(options=> 
+            {
+                options.Configuration = redisConfig["Host"];
+                options.InstanceName = redisConfig["DBName"];
+            });
 
 
 

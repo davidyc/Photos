@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Microsoft.Extensions.Configuration;
+using Photos.Application.Extensions;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Photos.Controllers
 {
@@ -23,16 +25,21 @@ namespace Photos.Controllers
     public class TestController : Controller
     {
         private readonly IQRCodeService _qrCode;
-        private readonly IBlobService _blobServiceClient;       
+        private readonly IBlobService _blobServiceClient;
+        private readonly IEventService _eventService;
 
-        public TestController(IBlobService blobServiceClient)
+
+        public TestController(IBlobService blobServiceClient, IEventService eventService)
         {
             _blobServiceClient = blobServiceClient;
+            _eventService = eventService;           
         }
 
         [HttpGet]
-        public IEnumerable<byte[]> Get()
-        {        
+        public async Task<IEnumerable<byte[]>> Get()
+        {
+            var x = await _eventService.GetAllEvents();
+
 
             return null;
         }

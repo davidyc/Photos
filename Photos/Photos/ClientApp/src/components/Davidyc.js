@@ -21,7 +21,7 @@ export class Davidyc extends Component {
 
 
     async test() {
-        const response = await fetch('Test');
+        const response = await fetch('api/Test');
         const data = await response.json();
         this.setState({ Images: data });
         console.log(this.state.Images)

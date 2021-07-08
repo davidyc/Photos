@@ -1,0 +1,2 @@
+REDIS
+    docker run --name redisForPhotos -p 17:6379 -d redis
