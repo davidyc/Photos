@@ -20,6 +20,7 @@ namespace Photos.Infrastructure
 
         }     
         public DbSet<PhotoEntity> Photos { get; set; }
+        public DbSet<EventEntity> Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,7 +39,7 @@ namespace Photos.Infrastructure
                 //.AddJsonFile("appsettings.json", optional: false)
                 .AddJsonFile($"appsettings.{envName}.json", optional: false)
                 .Build();
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PhotosDBContext"));
+                optionsBuilder.UseSqlServer("Server=tcp:davidyc.database.windows.net,1433;Initial Catalog=davidyc;Persist Security Info=False;User ID=davidyc;Password=191GU69y;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         
 

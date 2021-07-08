@@ -8,6 +8,8 @@ namespace Photos.Application.Repositories
     {
         private readonly PhotosDBContext _dbContext;
         private IPhotoRepository _photoRepository;
+        private IEventRepository _eventRepository;
+
 
         public UnitOfWork(PhotosDBContext dbContext)
         {
@@ -17,6 +19,11 @@ namespace Photos.Application.Repositories
         public IPhotoRepository PhotoRepository
         {
             get { return _photoRepository = new PhotoRepository(_dbContext); }
+        }
+
+        public IEventRepository EventRepository 
+        {
+            get { return _eventRepository = new EventRepository(_dbContext); }
         }
     }
 }
