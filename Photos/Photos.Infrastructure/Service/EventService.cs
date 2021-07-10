@@ -5,6 +5,7 @@ using Photos.Infrastructure.Service.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Photos.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Photos.Infrastructure.Service
 {
@@ -12,11 +13,14 @@ namespace Photos.Infrastructure.Service
     {
         private readonly IUnitOfWork _unityOfWork;
         private readonly IDistributedCache _cache;
+        private readonly ILogger<IEventService> _logger;
+
         private const string RECORDID_CACHE = "EVENTS_DATA";
-        public EventService(IUnitOfWork unityOfWork, IDistributedCache cache)
+        public EventService(IUnitOfWork unityOfWork, IDistributedCache cache, ILogger<IEventService> logger)
         {
             _unityOfWork = unityOfWork;
             _cache = cache;
+            _logger = logger;
         }
         public async Task<IEnumerable<EventEntity>> GetAllEvents()
         {

@@ -12,7 +12,7 @@ namespace Photos.Infrastructure.Service
 {
     public class QRCodeService : IQRCodeService
     {
-        private readonly ILogger<QRCodeService> _logger;
+        private readonly ILogger<IQRCodeService> _logger;
         private readonly QRCodeGenerator _qrCode;
         private readonly IConverterService _converter;
 

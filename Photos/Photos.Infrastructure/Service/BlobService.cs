@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Microsoft.Extensions.Logging;
 using Photos.Domain.Blob;
 using Photos.Infrastructure.Service.Interface;
 using System;
@@ -13,12 +14,14 @@ namespace Photos.Infrastructure.Service
     public class BlobService : IBlobService
     {
         private readonly BlobServiceClient _blobServiceClient;
+        private readonly ILogger<IEventService> _logger;
         private readonly string _containerName = "photocontainer";
 
-        public BlobService(BlobServiceClient blobServiceClient)
+        public BlobService(BlobServiceClient blobServiceClient, ILogger<IEventService> logger)
         {
             _blobServiceClient = blobServiceClient;
-        }
+            _logger = logger;
+    }
 
         public async Task<BlobDownloadResult> DownloadContentAsync(string fileName)
         {
