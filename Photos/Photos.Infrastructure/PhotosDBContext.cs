@@ -39,7 +39,7 @@ namespace Photos.Infrastructure
                 //.AddJsonFile("appsettings.json", optional: false)
                 .AddJsonFile($"appsettings.{envName}.json", optional: false)
                 .Build();
-                optionsBuilder.UseSqlServer("Server=tcp:davidyc.database.windows.net,1433;Initial Catalog=davidyc;Persist Security Info=False;User ID=davidyc;Password=191GU69y;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PhotosDBContext"));
             }
         
 
