@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Row, Col } from 'reactstrap';
 
 const imgType = "image/jpeg";
 
@@ -84,9 +83,7 @@ export class Photos extends Component {
     async getAllPhotos() {
         const response = await fetch('/api/Photos');
         const data = await response.json();        
-        this.setState({ Images: data });   
-        console.log(this.state.Images)
-     
+        this.setState({ Images: data });        
     }
 }
 

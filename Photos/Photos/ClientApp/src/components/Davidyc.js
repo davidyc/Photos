@@ -21,10 +21,11 @@ export class Davidyc extends Component {
 
 
     async test() {
-        const response = await fetch('api/Test');
+        
+        const response = await fetch('/api/Redis');
         const data = await response.json();
-        this.setState({ Images: data });
-        console.log(this.state.Images)
+        //this.setState({ Images: data });
+        console.log(data)
     }
     
 }

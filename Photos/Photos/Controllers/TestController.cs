@@ -36,12 +36,12 @@ namespace Photos.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<byte[]>> Get()
+        public async Task<IEnumerable<dynamic>> Get()
         {
             var x = await _eventService.GetAllEvents();
 
 
-            return null;
+            return x;
         }
 
 

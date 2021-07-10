@@ -6,6 +6,7 @@ import { Counter } from './components/Counter';
 import { Davidyc } from './components/Davidyc';
 import { QRCode } from './components/QRCode';
 import { Photos } from './components/Photos';
+import { Redis } from './components/Redis';
 
 
 import './custom.css'
@@ -21,6 +22,7 @@ export default class App extends Component {
             <Route path='/davidyc' component={Davidyc} />
             <Route path='/qrcode' component={QRCode} />
             <Route path='/photos' component={Photos} />
+            <Route path='/redis' component={Redis} />
       </Layout>
     );
   }
